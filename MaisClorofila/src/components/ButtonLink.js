@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import {primaryColor} from '../assets/styles/Colors';
+import {primaryColor, primaryColorActive} from '../assets/styles/Colors';
 
 const Button = (props) => {
   return (
-    <ButtonLinkContainer>
+    <ButtonLinkContainer
+      onPress={props.onPress}
+      underlayColor={primaryColorActive}>
       <ButtonLinkText>{props.text}</ButtonLinkText>
     </ButtonLinkContainer>
   );
