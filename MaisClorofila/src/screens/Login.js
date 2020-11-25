@@ -9,17 +9,25 @@ import {ContainerInput} from '../assets/styles/Form';
 // Components
 import Input from '../components/Input';
 import Button from '../components/Button';
+import ButtonLink from '../components/ButtonLink';
 
 // Images
 import BgImage from '../assets/images/bg-login.png';
+import LogoImagem from '../assets/images/logo-login.png';
+
+const onSubmit = (email, password) => {
+  console.log('teste: ', email, password);
+};
 
 const Login = () => {
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
     <Container>
       <BackgroundLogin source={BgImage}>
         <ContentLogin>
+          <LogoLogin source={LogoImagem} />
           <ContainerInput>
             <Input
               placeholder="seu e-mail"
@@ -36,12 +44,25 @@ const Login = () => {
               placeholder="sua senha"
               autoCapitalize="none"
               secureTextEntry={true}
+              value={password}
+              onChange={(input) => {
+                setPassword(input);
+              }}
             />
           </ContainerInput>
           <ContainerInput>
-            <Button texto="Entrar" />
+            <Button
+              text="Entrar"
+              onPress={() => {
+                onSubmit(email, password);
+              }}
+            />
           </ContainerInput>
         </ContentLogin>
+        <FooterLogin>
+          <FooterText>Ainda não tem conta?</FooterText>
+          <ButtonLink text="Cadastrar" />
+        </FooterLogin>
       </BackgroundLogin>
     </Container>
   );
@@ -61,6 +82,26 @@ const BackgroundLogin = styled.ImageBackground`
   width: 100%;
   height: 100%;
   min-height: ${Dimensions.get('window').height}px;
+`;
+
+const LogoLogin = styled.Image`
+  width: 73px;
+  height: 116px;
+  margin-bottom: 40px;
+`;
+
+const FooterLogin = styled.View`
+  width: 100%;
+  height: 115px;
+  align-items: center;
+  justify-content: center;
+`;
+
+const FooterText = styled.Text`
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #fff;
+  text-align: center;
 `;
 
 export default Login;

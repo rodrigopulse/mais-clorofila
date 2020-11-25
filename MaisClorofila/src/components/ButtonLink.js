@@ -1,25 +1,26 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import {primaryColor, primaryColorActive} from '../assets/styles/Colors';
+import {primaryColor} from '../assets/styles/Colors';
 
 const Button = (props) => {
   return (
-    <ButtonContainer onPress={props.onPress} underlayColor={primaryColorActive}>
-      <ButtonText>{props.text}</ButtonText>
-    </ButtonContainer>
+    <ButtonLinkContainer>
+      <ButtonLinkText>{props.text}</ButtonLinkText>
+    </ButtonLinkContainer>
   );
 };
 
-const ButtonContainer = styled.TouchableHighlight`
-  width: 100%;
-  height: 55px;
+const ButtonLinkContainer = styled.TouchableHighlight`
+  width: auto;
+  height: 35px;
+  padding: 0 25px;
   background: ${primaryColor};
   border-radius: 50px;
   align-items: center;
   justify-content: center;
 `;
 
-const ButtonText = styled.Text`
+const ButtonLinkText = styled.Text`
   width: 100%;
   text-align: center;
   text-transform: uppercase;
