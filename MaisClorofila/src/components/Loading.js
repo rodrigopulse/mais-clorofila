@@ -1,13 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 
+//Redux
+import {useSelector} from 'react-redux';
+
 import LoadingImage from '../assets/images/loading.webp';
 
 const Loading = () => {
+  const showLoading = useSelector((state) => state.loading.show);
   return (
-    <LoadingContainer>
-      <LoagindImage source={LoadingImage} />
-    </LoadingContainer>
+    <>
+      {showLoading && (
+        <LoadingContainer>
+          <LoagindImage source={LoadingImage} />
+        </LoadingContainer>
+      )}
+    </>
   );
 };
 

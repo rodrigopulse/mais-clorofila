@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {StatusBar} from 'react-native';
 
 import {NavigationContainer} from '@react-navigation/native';
@@ -15,11 +15,9 @@ import Login from './src/screens/Login';
 
 // Components
 import Loading from './src/components/Loading';
+import ModalAlert from './src/components/ModalAlert';
 
 const App = () => {
-  useEffect(() => {
-    console.log('Store: ', store.getState().loading.show);
-  });
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -30,7 +28,8 @@ const App = () => {
             <Stack.Screen name="Login" component={Login} />
           </Stack.Navigator>
         </NavigationContainer>
-        {store.getState().loading.show && <Loading />}
+        <Loading />
+        <ModalAlert />
       </Provider>
     </>
   );
