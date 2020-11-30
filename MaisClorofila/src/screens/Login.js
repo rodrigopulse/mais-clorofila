@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import {Dimensions} from 'react-native';
 
@@ -22,10 +22,6 @@ const onSubmit = (email, password) => {
 const Login = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  useEffect(() => {
-    console.log(navigation);
-  });
 
   return (
     <Container>
