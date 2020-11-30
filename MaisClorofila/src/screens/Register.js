@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import {Dimensions} from 'react-native';
 
 // Syles
-import {Container, ContainerImage} from '../assets/styles/Grid';
+import {ContainerScroll, ContainerImage} from '../assets/styles/Grid';
 import {ContainerInput} from '../assets/styles/Form';
+import {secondaryColor} from '../assets/styles/Colors';
 
 // Components
 import Input from '../components/Input';
@@ -13,30 +14,41 @@ import ButtonLink from '../components/ButtonLink';
 
 // Images
 import BgImage from '../assets/images/bg-login.png';
-import LogoImagem from '../assets/images/logo-login.png';
 
 const onSubmit = (email, password) => {
   console.log('teste: ', email, password);
 };
 
-const Login = ({navigation}) => {
+const Register = ({navigation}) => {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  useEffect(() => {
-    console.log(navigation);
-  });
+  const [passwordConfirm, setPasswordConfirm] = useState('');
 
   return (
-    <Container>
+    <ContainerScroll>
       <ContainerImage source={BgImage}>
         <ContentLogin>
-          <LogoLogin source={LogoImagem} />
+          <TitleLogin>Cadastrar</TitleLogin>
+          <SubtitleLogin>
+            Cadastre-se grátis e use sem se preocupar
+          </SubtitleLogin>
+          <ContainerInput>
+            <Input
+              placeholder="seu nome"
+              autoCapitalize="words"
+              type="name"
+              value={name}
+              onChange={(input) => {
+                setName(input);
+              }}
+            />
+          </ContainerInput>
           <ContainerInput>
             <Input
               placeholder="seu e-mail"
               autoCapitalize="none"
-              type="email-address"
+              type="email"
               value={email}
               onChange={(input) => {
                 setEmail(input);
@@ -47,6 +59,7 @@ const Login = ({navigation}) => {
             <Input
               placeholder="sua senha"
               autoCapitalize="none"
+              type="password"
               secureTextEntry={true}
               value={password}
               onChange={(input) => {
@@ -55,27 +68,52 @@ const Login = ({navigation}) => {
             />
           </ContainerInput>
           <ContainerInput>
+            <Input
+              placeholder="repita sua senha"
+              autoCapitalize="none"
+              type="password"
+              secureTextEntry={true}
+              value={passwordConfirm}
+              onChange={(input) => {
+                setPasswordConfirm(input);
+              }}
+            />
+          </ContainerInput>
+          <ContainerInput>
             <Button
-              text="Entrar"
+              text="Cadastrar"
               onPress={() => {
-                onSubmit(email, password);
+                onSubmit(name, email, password, passwordConfirm);
               }}
             />
           </ContainerInput>
         </ContentLogin>
         <FooterLogin>
-          <FooterText>Ainda não tem conta?</FooterText>
+          <FooterText>Já tem conta?</FooterText>
           <ButtonLink
-            text="Cadastrar"
+            text="Login"
             onPress={() => {
-              navigation.navigate('Register');
+              navigation.navigate('Login');
             }}
           />
         </FooterLogin>
       </ContainerImage>
-    </Container>
+    </ContainerScroll>
   );
 };
+
+const TitleLogin = styled.Text`
+  font-size: 18px;
+  font-weight: 700;
+  color: ${secondaryColor};
+`;
+
+const SubtitleLogin = styled.Text`
+  font-size: 16px;
+  font-weight: 700;
+  color: ${secondaryColor};
+  margin-bottom: 35px;
+`;
 
 const ContentLogin = styled.View`
   width: ${Dimensions.get('window').width}px;
@@ -85,12 +123,6 @@ const ContentLogin = styled.View`
   justify-content: center;
   margin: 0 auto;
   padding: 0 20px;
-`;
-
-const LogoLogin = styled.Image`
-  width: 73px;
-  height: 116px;
-  margin-bottom: 40px;
 `;
 
 const FooterLogin = styled.View`
@@ -107,4 +139,4 @@ const FooterText = styled.Text`
   text-align: center;
 `;
 
-export default Login;
+export default Register;
