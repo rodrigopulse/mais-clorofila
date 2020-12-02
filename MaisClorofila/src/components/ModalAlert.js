@@ -2,15 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 
 // Redux
-import {useDispatch} from 'react-redux';
-import {modalAlertShow} from '../store/actions/modalAlert';
-import {useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { modalAlertShow } from '../store/actions/modalAlert';
 
 // Components
 import ButtonLink from '../components/ButtonLink';
 
 // Styles
-import {darkText} from '../assets/styles/Colors';
+import { darkText } from '../assets/styles/Colors';
 
 const ModalAlert = () => {
   const dispatch = useDispatch();

@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 
 import loading from './loading';
 import modalAlert from './modalAlert';

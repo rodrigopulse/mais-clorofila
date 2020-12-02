@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import {secondaryColor} from '../assets/styles/Colors';
+import { secondaryColor } from '../assets/styles/Colors';
 
 const Input = (props) => {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import {primaryColor, primaryColorActive} from '../assets/styles/Colors';
+import { primaryColor, primaryColorActive } from '../assets/styles/Colors';
 
 const Button = (props) => {
   return (

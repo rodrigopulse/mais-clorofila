@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-//Redux
-import {useSelector} from 'react-redux';
+// Redux
+import { useSelector } from 'react-redux';
 
 import LoadingImage from '../assets/images/loading.webp';
 

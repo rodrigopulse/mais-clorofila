@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
-import {Dimensions} from 'react-native';
-import {primaryColor} from './Colors';
+import { Dimensions } from 'react-native';
+import { primaryColor } from './Colors';
 
 export const ContainerScroll = styled.ScrollView`
   width: 100%;

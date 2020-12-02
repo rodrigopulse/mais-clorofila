@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import {Dimensions} from 'react-native';
+import { Dimensions } from 'react-native';
 
 // Syles
-import {ContainerScroll, ContainerImage} from '../assets/styles/Grid';
-import {ContainerInput} from '../assets/styles/Form';
-import {secondaryColor} from '../assets/styles/Colors';
+import { ContainerScroll, ContainerImage } from '../assets/styles/Grid';
+import { ContainerInput } from '../assets/styles/Form';
+import { secondaryColor } from '../assets/styles/Colors';
 
 // Components
 import Input from '../components/Input';
@@ -19,7 +19,7 @@ const onSubmit = (email, password) => {
   console.log('teste: ', email, password);
 };
 
-const Register = ({navigation}) => {
+const Register = ({ navigation }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
