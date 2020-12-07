@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import { Dimensions } from 'react-native';
 
+// Form
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+
 // Syles
 import { ContainerScroll, ContainerImage } from '../assets/styles/Grid';
-import { ContainerInput } from '../assets/styles/Form';
-import { secondaryColor } from '../assets/styles/Colors';
+import { ContainerInput, ErrorInput } from '../assets/styles/Form';
 
 // Components
 import Input from '../components/Input';
@@ -15,78 +18,83 @@ import ButtonLink from '../components/ButtonLink';
 // Images
 import BgImage from '../assets/images/bg-login.png';
 
-const onSubmit = (email, password) => {
-  console.log('teste: ', email, password);
-};
+const RegisterSchema = Yup.object().shape({
+  name: Yup.string()
+    .min(5, 'Preencha com um nome válido')
+    .required('Campo obrigatório'),
+  email: Yup.string()
+    .email('Preencha com um e-mail valido')
+    .required('Campo obrigatório'),
+});
 
 const Register = ({ navigation }) => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirm, setPasswordConfirm] = useState('');
-
   return (
     <ContainerScroll>
       <ContainerImage source={BgImage}>
         <ContentLogin>
           <TitleLogin>Cadastrar</TitleLogin>
-          <SubtitleLogin>
-            Cadastre-se grátis e use sem se preocupar
-          </SubtitleLogin>
-          <ContainerInput>
-            <Input
-              placeholder="seu nome"
-              autoCapitalize="words"
-              type="name"
-              value={name}
-              onChange={(input) => {
-                setName(input);
-              }}
-            />
-          </ContainerInput>
-          <ContainerInput>
-            <Input
-              placeholder="seu e-mail"
-              autoCapitalize="none"
-              type="email"
-              value={email}
-              onChange={(input) => {
-                setEmail(input);
-              }}
-            />
-          </ContainerInput>
-          <ContainerInput>
-            <Input
-              placeholder="sua senha"
-              autoCapitalize="none"
-              type="password"
-              secureTextEntry={true}
-              value={password}
-              onChange={(input) => {
-                setPassword(input);
-              }}
-            />
-          </ContainerInput>
-          <ContainerInput>
-            <Input
-              placeholder="repita sua senha"
-              autoCapitalize="none"
-              type="password"
-              secureTextEntry={true}
-              value={passwordConfirm}
-              onChange={(input) => {
-                setPasswordConfirm(input);
-              }}
-            />
-          </ContainerInput>
-          <ContainerInput>
-            <Button
-              text="Cadastrar"
-              onPress={() => {
-                onSubmit(name, email, password, passwordConfirm);
-              }}
-            />
-          </ContainerInput>
+          <SubtitleLogin>Crie sua contra grátis</SubtitleLogin>
+          <Formik
+            initialValues={{ name: '', email: '' }}
+            validationSchema={RegisterSchema}
+            onSubmit={(values) => console.log('values: ', values)}
+          >
+            {({
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              values,
+              errors,
+              touched,
+            }) => (
+              <>
+                <ContainerInput>
+                  <Input
+                    placeholder="seu nome"
+                    autoCapitalize="words"
+                    value={values.name}
+                    onChange={handleChange('name')}
+                  />
+                  {errors.name && touched.name && (
+                    <ErrorInput>{errors.name}</ErrorInput>
+                  )}
+                </ContainerInput>
+                <ContainerInput>
+                  <Input
+                    placeholder="seu e-mail"
+                    autoCapitalize="none"
+                    type="email-address"
+                    value={values.email}
+                    onChange={handleChange('email')}
+                  />
+                  {errors.email && touched.email && (
+                    <ErrorInput>{errors.email}</ErrorInput>
+                  )}
+                </ContainerInput>
+                <ContainerInput>
+                  <Input
+                    placeholder="sua senha"
+                    autoCapitalize="none"
+                    secureTextEntry={true}
+                    value={values.password}
+                    onChange={handleChange('password')}
+                  />
+                </ContainerInput>
+                <ContainerInput>
+                  <Input
+                    placeholder="repita sua senha"
+                    autoCapitalize="none"
+                    secureTextEntry={true}
+                    value={values.passwordConfirm}
+                    onChange={handleChange('passwordConfirm')}
+                  />
+                </ContainerInput>
+                <ContainerInput>
+                  <Button text="Cadastrar" onPress={handleSubmit} />
+                </ContainerInput>
+              </>
+            )}
+          </Formik>
         </ContentLogin>
         <FooterLogin>
           <FooterText>Já tem conta?</FooterText>
@@ -103,15 +111,15 @@ const Register = ({ navigation }) => {
 };
 
 const TitleLogin = styled.Text`
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 700;
-  color: ${secondaryColor};
+  color: #fff;
 `;
 
 const SubtitleLogin = styled.Text`
   font-size: 16px;
   font-weight: 700;
-  color: ${secondaryColor};
+  color: #fff;
   margin-bottom: 35px;
 `;
 

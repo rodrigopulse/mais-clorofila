@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { Dimensions } from 'react-native';
 
-// Syles
+// Styles
 import { Container, ContainerImage } from '../assets/styles/Grid';
 import { ContainerInput } from '../assets/styles/Form';
 
