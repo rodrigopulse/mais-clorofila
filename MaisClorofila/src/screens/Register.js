@@ -25,6 +25,15 @@ const RegisterSchema = Yup.object().shape({
   email: Yup.string()
     .email('Preencha com um e-mail valido')
     .required('Campo obrigatório'),
+  password: Yup.string()
+    .required('Campo obrigatório')
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+      'Precisa conter 8 caracteres, uma maiscúla, uma minúscula, um número e um caracter especial',
+    ),
+  passwordConfirm: Yup.string()
+    .required('Campo obrigatório')
+    .oneOf([Yup.ref('password'), null], 'As senhas não são iguais'),
 });
 
 const Register = ({ navigation }) => {
@@ -35,7 +44,12 @@ const Register = ({ navigation }) => {
           <TitleLogin>Cadastrar</TitleLogin>
           <SubtitleLogin>Crie sua contra grátis</SubtitleLogin>
           <Formik
-            initialValues={{ name: '', email: '' }}
+            initialValues={{
+              name: '',
+              email: '',
+              password: '',
+              passwordConfirm: '',
+            }}
             validationSchema={RegisterSchema}
             onSubmit={(values) => console.log('values: ', values)}
           >
@@ -79,6 +93,9 @@ const Register = ({ navigation }) => {
                     value={values.password}
                     onChange={handleChange('password')}
                   />
+                  {errors.password && touched.password && (
+                    <ErrorInput>{errors.password}</ErrorInput>
+                  )}
                 </ContainerInput>
                 <ContainerInput>
                   <Input
@@ -88,6 +105,9 @@ const Register = ({ navigation }) => {
                     value={values.passwordConfirm}
                     onChange={handleChange('passwordConfirm')}
                   />
+                  {errors.passwordConfirm && touched.passwordConfirm && (
+                    <ErrorInput>{errors.passwordConfirm}</ErrorInput>
+                  )}
                 </ContainerInput>
                 <ContainerInput>
                   <Button text="Cadastrar" onPress={handleSubmit} />
