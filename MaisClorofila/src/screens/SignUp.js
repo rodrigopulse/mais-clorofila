@@ -2,6 +2,9 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { Dimensions } from 'react-native';
 
+// Services
+import UserService from '../services/UserService';
+
 // Form
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -18,25 +21,22 @@ import ButtonLink from '../components/ButtonLink';
 // Images
 import BgImage from '../assets/images/bg-login.png';
 
-const RegisterSchema = Yup.object().shape({
+const userService = new UserService();
+
+const SignUpSchema = Yup.object().shape({
   name: Yup.string()
     .min(5, 'Preencha com um nome válido')
     .required('Campo obrigatório'),
   email: Yup.string()
     .email('Preencha com um e-mail valido')
     .required('Campo obrigatório'),
-  password: Yup.string()
-    .required('Campo obrigatório')
-    .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-      'Precisa conter 8 caracteres, uma maiscúla, uma minúscula, um número e um caracter especial',
-    ),
+  password: Yup.string().required('Campo obrigatório'),
   passwordConfirm: Yup.string()
     .required('Campo obrigatório')
     .oneOf([Yup.ref('password'), null], 'As senhas não são iguais'),
 });
 
-const Register = ({ navigation }) => {
+const SignUp = ({ navigation }) => {
   return (
     <ContainerScroll>
       <ContainerImage source={BgImage}>
@@ -50,8 +50,17 @@ const Register = ({ navigation }) => {
               password: '',
               passwordConfirm: '',
             }}
-            validationSchema={RegisterSchema}
-            onSubmit={(values) => console.log('values: ', values)}
+            validationSchema={SignUpSchema}
+            onSubmit={(values) => {
+              userService
+                .SignUp(values)
+                .then((res) => {
+                  console.log(res);
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            }}
           >
             {({
               handleChange,
@@ -121,7 +130,7 @@ const Register = ({ navigation }) => {
           <ButtonLink
             text="Login"
             onPress={() => {
-              navigation.navigate('Login');
+              navigation.navigate('SignIn');
             }}
           />
         </FooterLogin>
@@ -167,4 +176,4 @@ const FooterText = styled.Text`
   text-align: center;
 `;
 
-export default Register;
+export default SignUp;

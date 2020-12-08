@@ -19,7 +19,7 @@ const onSubmit = (email, password) => {
   console.log('teste: ', email, password);
 };
 
-const Login = ({ navigation }) => {
+const SignIn = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -64,7 +64,7 @@ const Login = ({ navigation }) => {
           <ButtonLink
             text="Cadastrar"
             onPress={() => {
-              navigation.navigate('Register');
+              navigation.navigate('SignUp');
             }}
           />
         </FooterLogin>
@@ -103,4 +103,4 @@ const FooterText = styled.Text`
   text-align: center;
 `;
 
-export default Login;
+export default SignIn;
