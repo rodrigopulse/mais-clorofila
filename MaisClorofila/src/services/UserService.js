@@ -14,4 +14,8 @@ export default class UserService {
       return err;
     }
   };
+
+  url = () => {
+    return API_URL;
+  };
 }

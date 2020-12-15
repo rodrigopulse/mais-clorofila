@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components/native';
 import { Dimensions } from 'react-native';
 
@@ -37,6 +37,9 @@ const SignUpSchema = Yup.object().shape({
 });
 
 const SignUp = ({ navigation }) => {
+  useEffect(() => {
+    console.log('url ', userService.url());
+  });
   return (
     <ContainerScroll>
       <ContainerImage source={BgImage}>
@@ -143,6 +146,7 @@ const TitleLogin = styled.Text`
   font-size: 22px;
   font-weight: 700;
   color: #fff;
+  padding-top: 50px;
 `;
 
 const SubtitleLogin = styled.Text`
