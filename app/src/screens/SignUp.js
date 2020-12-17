@@ -1,9 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import { Dimensions } from 'react-native';
 
 // Services
-import UserService from '../services/UserService';
+import { SignUpService } from '../services/UserService';
+
+// Redux
+import { useDispatch } from 'react-redux';
+import { loadingAction } from '../store/actions/loading';
 
 // Form
 import { Formik } from 'formik';
@@ -21,8 +25,6 @@ import ButtonLink from '../components/ButtonLink';
 // Images
 import BgImage from '../assets/images/bg-login.png';
 
-const userService = new UserService();
-
 const SignUpSchema = Yup.object().shape({
   name: Yup.string()
     .min(5, 'Preencha com um nome válido')
@@ -37,9 +39,7 @@ const SignUpSchema = Yup.object().shape({
 });
 
 const SignUp = ({ navigation }) => {
-  useEffect(() => {
-    console.log('url ', userService.url());
-  });
+  const dispatch = useDispatch();
   return (
     <ContainerScroll>
       <ContainerImage source={BgImage}>
@@ -55,12 +55,14 @@ const SignUp = ({ navigation }) => {
             }}
             validationSchema={SignUpSchema}
             onSubmit={(values) => {
-              userService
-                .SignUp(values)
+              dispatch(loadingAction(true));
+              SignUpService(values)
                 .then((res) => {
-                  console.log(res);
+                  dispatch(loadingAction(false));
+                  console.log('then: ', res);
                 })
                 .catch((err) => {
+                  dispatch(loadingAction(false));
                   console.log(err);
                 });
             }}

@@ -3,6 +3,7 @@ import User from '../schemas/UserSchema'
 class UserController {
 
   async register (req, res) {
+    console.log('error')
     try {
       const user = await User.create(req.body)
       return res.status(200).json({ messagem: 'Conta criada' })
