@@ -4,18 +4,4 @@ Projeto que está sendo criado para auxiliar jardineiros amadores. A ideia é um
 
 ## Tecnologias
 
-A api está sendo contruída utilizando Nodejs e mongoDB, já o app está sendo contruído em React Native.
-
-## Emulando o app
-
-Primeiro rode
-
-```
-emulator -list-avds
-```
-
-Veja o nome na lista de avds e rode
-
-```
-emulator -avd NOME_DO_AVD
-```
+A api está sendo contruída utilizando Nodejs, mongoDB e Docker, já o app está sendo contruído em React Native.
