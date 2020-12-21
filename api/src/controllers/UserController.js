@@ -1,20 +1,61 @@
-import User from '../schemas/UserSchema'
-
+import User from "../schemas/UserSchema";
+import bcrypt from "bcrypt";
+import jwt from "jwt-simple";
 class UserController {
-
-  async register (req, res) {
-    console.log('error')
+  async register(req, res) {
     try {
-      const user = await User.create(req.body)
-      return res.status(200).json({ messagem: 'Conta criada' })
+      const user = await User.create(req.body);
+      return res
+        .status(200)
+        .json({ message: "Conta criada", user: user.email });
     } catch (err) {
-      if(err.code === 11000) {
-        return res.status(400).json({message: 'E-mail já registrado', code: err.code})
+      if (err.code === 11000) {
+        return res
+          .status(400)
+          .json({ message: "E-mail já registrado", error: err.code });
       }
-      return res.status(400).json({message: 'Ocorreu um erro e a conta não foi criada'})
+      return res
+        .status(400)
+        .json({ message: "Ocorreu um erro e a conta não foi criada" });
     }
   }
 
+  async login(req, res) {
+    try {
+      const user = await User.findOne({ email: req.body.email });
+      if (user.length === 0) {
+        return res
+          .status(401)
+          .json({ mensage: "Usuário e/ou senha incorretos" });
+      }
+      console.log("user: ", user);
+      bcrypt.compare(
+        req.body.password,
+        user.password || "",
+        function (err, result) {
+          if (result) {
+            const payload = { id: user._id };
+            const token = jwt.encode(payload, process.env.SECRET_JWT || "");
+            return res.status(200).json({
+              _id: user._id,
+              email: user.email,
+              token: token,
+            });
+          } else if (err) {
+            return res.status(401).json({ mensage: "Ocorreu um erro" });
+          } else {
+            return res
+              .status(401)
+              .json({ mensage: "Usuário e/ou senha incorretos" });
+          }
+        }
+      );
+    } catch (err) {
+      return res
+        .status(401)
+        .json({ mensage: "Ocorreu um problema", error: err });
+    }
+  }
 }
 
-export default new UserController()
+export default new UserController();

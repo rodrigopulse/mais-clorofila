@@ -1,13 +1,16 @@
-import { Router } from 'express'
+import { Router } from "express";
 
 // Controllers
-import UserController from '../controllers/UserController'
+import UserController from "../controllers/UserController";
 
-const routes = Router()
+const routes = Router();
 
-routes.get('/', (req, res) => {res.status(200).json({helloWorld: 'Welcome to Mais Clorofila'})})
+routes.get("/", (req, res) => {
+  res.status(200).json({ helloWorld: "Welcome to Mais Clorofila" });
+});
 
 //User
-routes.post('/user/register', UserController.register)
+routes.post("/user/register", UserController.register);
+routes.post("/user/login", UserController.login);
 
-export default routes
+export default routes;
