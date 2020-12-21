@@ -3,11 +3,16 @@ import styled from 'styled-components/native';
 import { Dimensions } from 'react-native';
 
 // Services
-import { SignUpService } from '../services/UserService';
+import {
+  SignUpService,
+  SignInService,
+  TokenSave,
+} from '../services/UserService';
 
 // Redux
 import { useDispatch } from 'react-redux';
 import { loadingAction } from '../store/actions/loading';
+import { modalAlertShow } from '../store/actions/modalAlert';
 
 // Form
 import { Formik } from 'formik';
@@ -40,6 +45,23 @@ const SignUpSchema = Yup.object().shape({
 
 const SignUp = ({ navigation }) => {
   const dispatch = useDispatch();
+
+  const login = (email, password) => {
+    SignInService({
+      email: email,
+      password: password,
+    })
+      .then((res) => {
+        TokenSave(res.data.token).then(() => {
+          navigation.navigate('Home');
+          dispatch(loadingAction(false));
+        });
+      })
+      .catch(() => {
+        dispatch(loadingAction(false));
+        navigation.navigate('SignIn');
+      });
+  };
   return (
     <ContainerScroll>
       <ContainerImage source={BgImage}>
@@ -58,12 +80,34 @@ const SignUp = ({ navigation }) => {
               dispatch(loadingAction(true));
               SignUpService(values)
                 .then((res) => {
-                  dispatch(loadingAction(false));
-                  console.log('then: ', res);
+                  console.log(res.status);
+                  if (res.status === 200) {
+                    login();
+                  } else if (
+                    res.response.status === 400 &&
+                    res.response.data.error === 11000
+                  ) {
+                    dispatch(loadingAction(false));
+                    dispatch(modalAlertShow(true, 'Usuário já existe'));
+                  } else {
+                    dispatch(loadingAction(false));
+                    dispatch(
+                      modalAlertShow(
+                        true,
+                        'Ocorreu um erro, tente novamente mais tarde',
+                      ),
+                    );
+                  }
                 })
                 .catch((err) => {
-                  dispatch(loadingAction(false));
                   console.log(err);
+                  dispatch(loadingAction(false));
+                  dispatch(
+                    modalAlertShow(
+                      true,
+                      'Ocorreu um erro, tente novamente mais tarde',
+                    ),
+                  );
                 });
             }}
           >

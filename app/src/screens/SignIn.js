@@ -36,7 +36,7 @@ const SignIn = ({ navigation }) => {
       .then((res) => {
         dispatch(loadingAction(false));
         if (res.data.token) {
-          TokenSave(res.data.token).then((res) => {
+          TokenSave(res.data.token).then(() => {
             navigation.navigate('Home');
           });
         } else {

@@ -24,7 +24,6 @@ export const SignInService = async (data) => {
     });
     return response;
   } catch (err) {
-    console.log('erro service  ', err.response.data);
     return err.response;
   }
 };
