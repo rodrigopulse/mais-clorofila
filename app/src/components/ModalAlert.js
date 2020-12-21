@@ -14,6 +14,7 @@ import { darkText } from '../assets/styles/Colors';
 const ModalAlert = () => {
   const dispatch = useDispatch();
   const showModal = useSelector((state) => state.modalAlert.show);
+  const messageModal = useSelector((state) => state.modalAlert.message);
   const closeModal = () => {
     dispatch(modalAlertShow(false, ''));
   };
@@ -22,7 +23,7 @@ const ModalAlert = () => {
       {showModal && (
         <ModalAlertContainer>
           <ModalAlertContent>
-            <ModalAlertMessage>Mensagem</ModalAlertMessage>
+            <ModalAlertMessage>{messageModal}</ModalAlertMessage>
             <ButtonLink
               text="ok"
               onPress={() => {

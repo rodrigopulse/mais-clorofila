@@ -13,9 +13,9 @@ const Welcome = ({ navigation }) => {
   }, []);
   const logged = async () => {
     try {
-      const token = await AsyncStorage.getItem('token');
+      const token = await AsyncStorage.getItem('@MaisClorofila:token');
       if (token !== null) {
-        console.log(token);
+        navigation.navigate('Home');
       } else {
         navigation.navigate('SignIn');
       }

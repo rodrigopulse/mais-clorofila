@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { Dimensions } from 'react-native';
+import { SignInService, TokenSave } from '../services/UserService';
 
 // Styles
 import { Container, ContainerImage } from '../assets/styles/Grid';
@@ -11,17 +12,42 @@ import Input from '../components/Input';
 import Button from '../components/Button';
 import ButtonLink from '../components/ButtonLink';
 
+// Redux
+import { useDispatch } from 'react-redux';
+import { modalAlertShow } from '../store/actions/modalAlert';
+import { loadingAction } from '../store/actions/loading';
+
 // Images
 import BgImage from '../assets/images/bg-login.png';
 import LogoImagem from '../assets/images/logo-login.png';
 
-const onSubmit = (email, password) => {
-  console.log('teste: ', email, password);
-};
-
 const SignIn = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+
+  const onSubmit = (email, password) => {
+    dispatch(loadingAction(true));
+    const data = {
+      email: email,
+      password: password,
+    };
+    SignInService(data)
+      .then((res) => {
+        dispatch(loadingAction(false));
+        if (res.data.token) {
+          TokenSave(res.data.token).then((res) => {
+            navigation.navigate('Home');
+          });
+        } else {
+          dispatch(modalAlertShow(true, 'Usuário e/ou senha incorretos'));
+        }
+      })
+      .catch(() => {
+        dispatch(loadingAction(false));
+        dispatch(modalAlertShow(true, 'Usuário e/ou senha incorretos'));
+      });
+  };
 
   return (
     <Container>

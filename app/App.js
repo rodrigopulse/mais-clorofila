@@ -12,6 +12,7 @@ import store from './src/store';
 import Welcome from './src/screens/Welcome';
 import SignIn from './src/screens/SignIn';
 import SignUp from './src/screens/SignUp';
+import Home from './src/screens/Home';
 
 // Components
 import Loading from './src/components/Loading';
@@ -30,6 +31,7 @@ const App = () => {
             <Stack.Screen name="Welcome" component={Welcome} />
             <Stack.Screen name="SignIn" component={SignIn} />
             <Stack.Screen name="SignUp" component={SignUp} />
+            <Stack.Screen name="Home" component={Home} />
           </Stack.Navigator>
         </NavigationContainer>
         <Loading />

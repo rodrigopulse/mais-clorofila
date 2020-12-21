@@ -36,11 +36,7 @@ class UserController {
           if (result) {
             const payload = { id: user._id };
             const token = jwt.encode(payload, process.env.SECRET_JWT || "");
-            return res.status(200).json({
-              _id: user._id,
-              email: user.email,
-              token: token,
-            });
+            return res.status(200).json({ token: token });
           } else if (err) {
             return res.status(401).json({ mensage: "Ocorreu um erro" });
           } else {
@@ -53,7 +49,7 @@ class UserController {
     } catch (err) {
       return res
         .status(401)
-        .json({ mensage: "Ocorreu um problema", error: err });
+        .json({ mensage: "Usuário e/ou senha incorretos", error: err });
     }
   }
 }
