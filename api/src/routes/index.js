@@ -12,5 +12,6 @@ routes.get("/", (req, res) => {
 //User
 routes.post("/user/register", UserController.register);
 routes.post("/user/login", UserController.login);
+routes.delete("/user/delete/:id", UserController.delete);
 
 export default routes;

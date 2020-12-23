@@ -28,7 +28,6 @@ class UserController {
           .status(401)
           .json({ mensage: "Usuário e/ou senha incorretos" });
       }
-      console.log("user: ", user);
       bcrypt.compare(
         req.body.password,
         user.password || "",
@@ -50,6 +49,27 @@ class UserController {
       return res
         .status(401)
         .json({ mensage: "Usuário e/ou senha incorretos", error: err });
+    }
+  }
+
+  async delete(req, res) {
+    try {
+      const id = req.path.split("/").pop();
+      const user = await User.deleteOne({ email: id });
+      if (user.deletedCount >= 1) {
+        return res
+          .status(200)
+          .json({
+            message: "Usuário deletado com sucesso",
+            userDeleted: user.deletedCount,
+          });
+      } else {
+        return res.status(400).json({ message: "Usuário não encontrado" });
+      }
+    } catch (err) {
+      return res
+        .status(400)
+        .json({ message: "Usuário não deletado", error: err });
     }
   }
 }
