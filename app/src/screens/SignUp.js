@@ -66,8 +66,8 @@ const SignUp = ({ navigation }) => {
     <ContainerScroll>
       <ContainerImage source={BgImage}>
         <ContentLogin>
-          <TitleLogin>Cadastrar</TitleLogin>
-          <SubtitleLogin>Crie sua contra grátis</SubtitleLogin>
+          <TitleLogin>CADASTRAR</TitleLogin>
+          <SubtitleLogin>Crie sua conta grátis</SubtitleLogin>
           <Formik
             initialValues={{
               name: '',

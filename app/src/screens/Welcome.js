@@ -17,10 +17,10 @@ const Welcome = ({ navigation }) => {
       if (token !== null) {
         navigation.navigate('Home');
       } else {
-        navigation.navigate('SignIn');
+        navigation.navigate('SignUp');
       }
     } catch (token) {
-      navigation.navigate('SignIn');
+      navigation.navigate('SignUp');
     }
   };
   return (

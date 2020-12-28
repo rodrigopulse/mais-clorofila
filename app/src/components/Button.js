@@ -14,7 +14,7 @@ const ButtonContainer = styled.TouchableHighlight`
   width: 100%;
   height: 55px;
   background: ${primaryColor};
-  border-radius: 50px;
+  border-radius: 8px;
   align-items: center;
   justify-content: center;
 `;
