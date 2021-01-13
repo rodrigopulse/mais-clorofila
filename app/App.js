@@ -3,6 +3,7 @@ import { StatusBar } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { navigationRef } from './src/services/RootNavigationService';
 
 // Redux
 import { Provider } from 'react-redux';
@@ -29,7 +30,7 @@ const App = () => {
 
       <Provider store={store}>
         <Header />
-        <NavigationContainer>
+        <NavigationContainer ref={navigationRef}>
           <Stack.Navigator headerMode="null">
             <Stack.Screen name="Welcome" component={Welcome} />
             <Stack.Screen name="SignIn" component={SignIn} />

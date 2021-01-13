@@ -1,12 +1,11 @@
 import styled from 'styled-components/native';
 import { Dimensions } from 'react-native';
-import { primaryColor } from './Colors';
 
 export const ContainerScroll = styled.ScrollView`
   width: 100%;
   height: 100%;
   min-height: 100%;
-  background: ${primaryColor};
+  padding: ${(props) => (props.content ? '20px' : 0)};
 `;
 
 export const Container = styled.View`

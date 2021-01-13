@@ -1,10 +1,17 @@
 import React from 'react';
+import { navigate } from '../services/RootNavigationService';
+// Styles
 import styled from 'styled-components/native';
-import ButtonIcon from './ButtonIcon';
 import { darkGray } from '../assets/styles/Colors';
+// Components
+import Button from '../components/Button';
+import ButtonIcon from './ButtonIcon';
+// Services
+import { LogoutService } from '../services/UserService';
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
 import { menuOpenAction } from '../store/actions/menu';
+import { loggedAction } from '../store/actions/user';
 
 const Menu = () => {
   const dispatch = useDispatch();
@@ -12,6 +19,14 @@ const Menu = () => {
   const closeMenu = () => {
     dispatch(menuOpenAction(false));
   };
+  const logout = () => {
+    LogoutService().then(() => {
+      closeMenu();
+      dispatch(loggedAction(false));
+      navigate('SignIn');
+    });
+  };
+
   return (
     <>
       {showMenu && (
@@ -24,6 +39,7 @@ const Menu = () => {
               onPress={closeMenu}
             />
           </MenuCloseContainer>
+          <Button text="Logout" onPress={logout} />
         </MenuContainer>
       )}
     </>
