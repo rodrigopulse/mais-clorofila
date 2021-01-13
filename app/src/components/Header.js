@@ -35,5 +35,6 @@ const HeaderContainer = styled.View`
   padding: 0 25px;
   background: ${primaryColor};
   justify-content: center;
+  z-index: 8;
 `;
 export default Header;

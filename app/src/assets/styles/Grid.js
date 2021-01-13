@@ -6,6 +6,8 @@ export const ContainerScroll = styled.ScrollView`
   height: 100%;
   min-height: 100%;
   padding: ${(props) => (props.content ? '20px' : 0)};
+  z-index: 1;
+  flex: 1;
 `;
 
 export const Container = styled.View`

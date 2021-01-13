@@ -3,8 +3,8 @@ import { navigate } from '../services/RootNavigationService';
 // Styles
 import styled from 'styled-components/native';
 import { darkGray } from '../assets/styles/Colors';
+import Icon from 'react-native-vector-icons/FontAwesome';
 // Components
-import Button from '../components/Button';
 import ButtonIcon from './ButtonIcon';
 // Services
 import { LogoutService } from '../services/UserService';
@@ -13,6 +13,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import { menuOpenAction } from '../store/actions/menu';
 import { loggedAction } from '../store/actions/user';
 
+const MenuButton = (props) => {
+  return (
+    <MenuButtonPress onPress={props.onPress}>
+      <MenuButtonContainer>
+        <MenuIcon name={props.icon} size={22} color={darkGray} />
+        <MenuButtonText>{props.text}</MenuButtonText>
+      </MenuButtonContainer>
+    </MenuButtonPress>
+  );
+};
 const Menu = () => {
   const dispatch = useDispatch();
   const showMenu = useSelector((state) => state.menu.show);
@@ -39,7 +49,9 @@ const Menu = () => {
               onPress={closeMenu}
             />
           </MenuCloseContainer>
-          <Button text="Logout" onPress={logout} />
+          <MenuContent>
+            <MenuButton icon="minus-circle" text="Sair" onPress={logout} />
+          </MenuContent>
         </MenuContainer>
       )}
     </>
@@ -47,7 +59,7 @@ const Menu = () => {
 };
 
 const MenuContainer = styled.View`
-  width: 100%;
+  width: 70%;
   height: 100%;
   position: absolute;
   top: 0;
@@ -56,9 +68,30 @@ const MenuContainer = styled.View`
   z-index: 9;
   padding: 20px;
 `;
+const MenuContent = styled.View`
+  width: 100%;
+  padding-top: 20px;
+`;
+const MenuIcon = styled(Icon)`
+  padding-right: 20px;
+`;
 const MenuCloseContainer = styled.View`
   width: 100%;
   align-items: flex-end;
+`;
+const MenuButtonContainer = styled.View`
+  flex-direction: row;
+`;
+const MenuButtonPress = styled.TouchableHighlight`
+  width: 100%;
+  height: auto;
+`;
+
+const MenuButtonText = styled.Text`
+  width: auto;
+  font-size: 16px;
+  font-weight: 700;
+  color: ${darkGray};
 `;
 
 export default Menu;
