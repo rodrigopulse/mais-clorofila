@@ -16,6 +16,7 @@ import ButtonLink from '../components/ButtonLink';
 import { useDispatch } from 'react-redux';
 import { modalAlertShow } from '../store/actions/modalAlert';
 import { loadingAction } from '../store/actions/loading';
+import { loggedAction } from '../store/actions/user';
 
 // Images
 import BgImage from '../assets/images/bg-login.png';
@@ -37,6 +38,7 @@ const SignIn = ({ navigation }) => {
         dispatch(loadingAction(false));
         if (res.data.token) {
           TokenSave(res.data.token).then(() => {
+            dispatch(loggedAction(true));
             navigation.navigate('Home');
           });
         } else {

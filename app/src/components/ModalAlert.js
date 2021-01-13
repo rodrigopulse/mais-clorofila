@@ -9,7 +9,7 @@ import { modalAlertShow } from '../store/actions/modalAlert';
 import ButtonLink from '../components/ButtonLink';
 
 // Styles
-import { darkText } from '../assets/styles/Colors';
+import { darkGray } from '../assets/styles/Colors';
 
 const ModalAlert = () => {
   const dispatch = useDispatch();
@@ -60,7 +60,7 @@ const ModalAlertContent = styled.View`
 const ModalAlertMessage = styled.Text`
   font-size: 16px;
   text-align: center;
-  color: ${darkText};
+  color: ${darkGray};
   margin-bottom: 20px;
 `;
 

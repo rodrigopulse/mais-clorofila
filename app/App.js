@@ -17,6 +17,7 @@ import Home from './src/screens/Home';
 // Components
 import Loading from './src/components/Loading';
 import ModalAlert from './src/components/ModalAlert';
+import Header from './src/components/Header';
 
 const Stack = createStackNavigator();
 
@@ -26,6 +27,7 @@ const App = () => {
       <StatusBar barStyle="dark-content" />
 
       <Provider store={store}>
+        <Header />
         <NavigationContainer>
           <Stack.Navigator headerMode="null">
             <Stack.Screen name="Welcome" component={Welcome} />

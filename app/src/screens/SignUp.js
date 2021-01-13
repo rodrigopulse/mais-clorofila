@@ -12,6 +12,7 @@ import {
 import { useDispatch } from 'react-redux';
 import { loadingAction } from '../store/actions/loading';
 import { modalAlertShow } from '../store/actions/modalAlert';
+import { loggedAction } from '../store/actions/user';
 
 // Form
 import { Formik } from 'formik';
@@ -52,6 +53,7 @@ const SignUp = ({ navigation }) => {
     })
       .then((res) => {
         TokenSave(res.data.token).then(() => {
+          dispatch(loggedAction(true));
           navigation.navigate('Home');
           dispatch(loadingAction(false));
         });
@@ -79,7 +81,6 @@ const SignUp = ({ navigation }) => {
               dispatch(loadingAction(true));
               SignUpService(values)
                 .then((res) => {
-                  console.log(res.status);
                   if (res.status === 200) {
                     login();
                   } else if (
