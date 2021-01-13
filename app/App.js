@@ -18,6 +18,7 @@ import Home from './src/screens/Home';
 import Loading from './src/components/Loading';
 import ModalAlert from './src/components/ModalAlert';
 import Header from './src/components/Header';
+import Menu from './src/components/Menu';
 
 const Stack = createStackNavigator();
 
@@ -38,6 +39,7 @@ const App = () => {
         </NavigationContainer>
         <Loading />
         <ModalAlert />
+        <Menu />
       </Provider>
     </>
   );

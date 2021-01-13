@@ -13,6 +13,7 @@ export const Container = styled.View`
   width: 100%;
   height: 100%;
   min-height: 100%;
+  z-index: 1;
 `;
 
 export const ContainerImage = styled.ImageBackground`

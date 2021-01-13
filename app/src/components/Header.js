@@ -1,21 +1,28 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { primaryColor } from '../assets/styles/Colors';
+import { primaryColor, darkGray } from '../assets/styles/Colors';
 // Components
-import IconMenuHamburguer from './ButtonMenuHamburguer';
+import ButtonIcon from './ButtonIcon';
 // Redux
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { menuOpenAction } from '../store/actions/menu';
 
 const Header = () => {
+  const dispatch = useDispatch();
   const logged = useSelector((state) => state.user.logged);
-  const openMenuHamburguer = () => {
-    console.log('teste');
+  const openMenu = () => {
+    dispatch(menuOpenAction(true));
   };
   return (
     <>
       {logged && (
         <HeaderContainer>
-          <IconMenuHamburguer onPress={openMenuHamburguer} />
+          <ButtonIcon
+            name="bars"
+            size={22}
+            color={darkGray}
+            onPress={openMenu}
+          />
         </HeaderContainer>
       )}
     </>
