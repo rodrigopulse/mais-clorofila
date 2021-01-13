@@ -7,10 +7,14 @@ import { Title } from '../assets/styles/Texts';
 // Components
 import CardList from '../components/CardList';
 const Home = () => {
+  const pressCard = () => {
+    console.log('teste');
+  };
   return (
     <ContainerScroll content>
       <Title>Meus Grupos</Title>
       <CardList
+        onPress={pressCard}
         title="Hortaliças"
         text={[
           {

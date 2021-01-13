@@ -4,20 +4,26 @@ import styled from 'styled-components/native';
 
 const CardList = (props) => {
   return (
-    <CardListContainer>
-      <CardListIcon
-        source={require(`../assets/images/group-icons/garden.png`)}
-      />
-      <CardListContent>
-        <CardListTitle>{props.title}</CardListTitle>
-        {props.text.map((item, index) => (
-          <CardListText key={index}>{item.text}</CardListText>
-        ))}
-      </CardListContent>
-    </CardListContainer>
+    <CardListPress onPress={props.onPress}>
+      <CardListContainer>
+        <CardListIcon
+          source={require(`../assets/images/group-icons/garden.png`)}
+        />
+        <CardListContent>
+          <CardListTitle>{props.title}</CardListTitle>
+          {props.text.map((item, index) => (
+            <CardListText key={index}>{item.text}</CardListText>
+          ))}
+        </CardListContent>
+      </CardListContainer>
+    </CardListPress>
   );
 };
 
+const CardListPress = styled.TouchableHighlight`
+  width: 100%;
+  height: 80px;
+`;
 const CardListContainer = styled.View`
   width: 100%;
   height: 80px;
