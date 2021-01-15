@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Styles
-import { ContainerScroll } from '../assets/styles/Grid';
+import { ContainerScroll, Container } from '../assets/styles/Grid';
 import { Title } from '../assets/styles/Texts';
 
 // Components
@@ -12,7 +12,9 @@ const Home = ({ navigation }) => {
   };
   return (
     <ContainerScroll content>
-      <Title>Meus Grupos</Title>
+      <Container marginTop marginBottom>
+        <Title>Meus Grupos</Title>
+      </Container>
       <CardList
         onPress={pressCard}
         title="Hortaliças"

@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import styled from 'styled-components/native';
 import { ContainerScroll, Container } from '../assets/styles/Grid';
 import { darkGray } from '../assets/styles/Colors';
+import { Title } from '../assets/styles/Texts';
 // Components
 import Divisor from '../components/Divisor';
 import ButtonLink from '../components/ButtonLink';
@@ -15,6 +16,10 @@ const Group = () => {
         <GroupImage
           source={require(`../assets/images/group-icons/garden.png`)}
         />
+      </Container>
+      <Divisor />
+      <Container marginTop marginBottom>
+        <Title>Hortaliças</Title>
       </Container>
       <Divisor />
       <Container marginTop>
@@ -44,7 +49,9 @@ const Group = () => {
       </Container>
       <Divisor />
       <Container marginTop marginBottom>
-        <HistoryTitle>Histórico de Adubação</HistoryTitle>
+        <Container marginBottom>
+          <Title>Histórico de Adubação</Title>
+        </Container>
         <HistoryContent>
           <HistoryText>01-09-2020 (Bokashi)</HistoryText>
           <HistoryText>01-09-2020 (Bokashi)</HistoryText>
@@ -75,11 +82,6 @@ const GroupText = styled.Text`
 `;
 const GroupTextIcon = styled(Icon)`
   margin: 0;
-`;
-const HistoryTitle = styled.Text`
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 15px;
 `;
 const HistoryContent = styled.View`
   width: 100%;
