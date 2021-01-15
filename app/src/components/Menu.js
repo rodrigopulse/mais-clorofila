@@ -2,7 +2,7 @@ import React from 'react';
 import { navigate } from '../services/RootNavigationService';
 // Styles
 import styled from 'styled-components/native';
-import { darkGray } from '../assets/styles/Colors';
+import { darkGray, lightGray } from '../assets/styles/Colors';
 import Icon from 'react-native-vector-icons/FontAwesome';
 // Components
 import ButtonIcon from './ButtonIcon';
@@ -15,7 +15,7 @@ import { loggedAction } from '../store/actions/user';
 
 const MenuButton = (props) => {
   return (
-    <MenuButtonPress onPress={props.onPress}>
+    <MenuButtonPress onPress={props.onPress} underlayColor="#e0e0e0">
       <MenuButtonContainer>
         <MenuIcon name={props.icon} size={22} color={darkGray} />
         <MenuButtonText>{props.text}</MenuButtonText>
@@ -55,7 +55,7 @@ const Menu = () => {
           </MenuCloseContainer>
           <MenuContent>
             <MenuButton
-              icon="minus-circle"
+              icon="home"
               text="Home"
               onPress={() => goToScreen('Home')}
             />
@@ -75,7 +75,6 @@ const MenuContainer = styled.View`
   left: 0;
   background: #fff;
   z-index: 9;
-  padding: 20px;
 `;
 const MenuContent = styled.View`
   width: 100%;
@@ -87,12 +86,14 @@ const MenuIcon = styled(Icon)`
 const MenuCloseContainer = styled.View`
   width: 100%;
   align-items: flex-end;
+  padding-right: 15px;
+  padding-top: 15px;
 `;
 const MenuButtonContainer = styled.View`
   flex-direction: row;
 `;
 const MenuButtonPress = styled.TouchableHighlight`
-  padding: 10px 0;
+  padding: 10px 20px;
   width: 100%;
   height: auto;
 `;
