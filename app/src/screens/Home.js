@@ -6,9 +6,9 @@ import { Title } from '../assets/styles/Texts';
 
 // Components
 import CardList from '../components/CardList';
-const Home = () => {
+const Home = ({ navigation }) => {
   const pressCard = () => {
-    console.log('teste');
+    navigation.navigate('Group');
   };
   return (
     <ContainerScroll content>

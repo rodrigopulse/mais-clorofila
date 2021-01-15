@@ -36,6 +36,10 @@ const Menu = () => {
       navigate('SignIn');
     });
   };
+  const goToScreen = (e) => {
+    closeMenu();
+    navigate(e);
+  };
 
   return (
     <>
@@ -50,6 +54,11 @@ const Menu = () => {
             />
           </MenuCloseContainer>
           <MenuContent>
+            <MenuButton
+              icon="minus-circle"
+              text="Home"
+              onPress={() => goToScreen('Home')}
+            />
             <MenuButton icon="minus-circle" text="Sair" onPress={logout} />
           </MenuContent>
         </MenuContainer>
@@ -83,10 +92,10 @@ const MenuButtonContainer = styled.View`
   flex-direction: row;
 `;
 const MenuButtonPress = styled.TouchableHighlight`
+  padding: 10px 0;
   width: 100%;
   height: auto;
 `;
-
 const MenuButtonText = styled.Text`
   width: auto;
   font-size: 16px;
