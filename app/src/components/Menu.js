@@ -2,7 +2,7 @@ import React from 'react';
 import { navigate } from '../services/RootNavigationService';
 // Styles
 import styled from 'styled-components/native';
-import { darkGray, lightGray } from '../assets/styles/Colors';
+import { darkGray } from '../assets/styles/Colors';
 import Icon from 'react-native-vector-icons/FontAwesome';
 // Components
 import ButtonIcon from './ButtonIcon';
@@ -44,16 +44,21 @@ const Menu = () => {
   return (
     <>
       {showMenu && (
-        <MenuContainer>
-          <MenuCloseContainer>
-            <ButtonIcon
-              name="times"
-              size={22}
-              color={darkGray}
-              onPress={closeMenu}
-            />
-          </MenuCloseContainer>
+        <MenuContainer
+          underlayColor="rgba(0, 0, 0, 0.4)"
+          onPress={() => {
+            closeMenu();
+          }}
+        >
           <MenuContent>
+            <MenuCloseContainer>
+              <ButtonIcon
+                name="times"
+                size={22}
+                color={darkGray}
+                onPress={closeMenu}
+              />
+            </MenuCloseContainer>
             <MenuButton
               icon="home"
               text="Home"
@@ -67,18 +72,19 @@ const Menu = () => {
   );
 };
 
-const MenuContainer = styled.View`
-  width: 70%;
+const MenuContainer = styled.TouchableHighlight`
+  width: 100%;
   height: 100%;
   position: absolute;
   top: 0;
   left: 0;
-  background: #fff;
   z-index: 9;
+  background: rgba(0, 0, 0, 0.4);
 `;
 const MenuContent = styled.View`
-  width: 100%;
-  padding-top: 20px;
+  width: 70%;
+  height: 100%;
+  background: #fff;
 `;
 const MenuIcon = styled(Icon)`
   padding-right: 20px;
