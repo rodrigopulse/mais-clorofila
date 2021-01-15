@@ -20,7 +20,7 @@ const Group = () => {
       <Container marginTop>
         <GroupTextContainer>
           <GroupTextIcon name="leaf" size={18} color={darkGray} />
-          <GroupText>Última adubação: 01/10/2020</GroupText>
+          <GroupText>Última adubação: 01/10/2020 {'\n'} (Bokashi)</GroupText>
         </GroupTextContainer>
       </Container>
       <Container marginTop>
@@ -43,6 +43,15 @@ const Group = () => {
         <ButtonLink text="Adicionar Rega" />
       </Container>
       <Divisor />
+      <Container marginTop marginBottom>
+        <HistoryTitle>Histórico de Adubação</HistoryTitle>
+        <HistoryContent>
+          <HistoryText>01-09-2020 (Bokashi)</HistoryText>
+          <HistoryText>01-09-2020 (Bokashi)</HistoryText>
+          <HistoryText>01-09-2020 (Bokashi)</HistoryText>
+          <HistoryText>01-09-2020 (Bokashi)</HistoryText>
+        </HistoryContent>
+      </Container>
     </ContainerScroll>
   );
 };
@@ -59,12 +68,25 @@ const GroupTextContainer = styled.View`
   justify-content: flex-start;
 `;
 const GroupText = styled.Text`
+  width: 100%;
   font-size: 14px;
   color: ${darkGray};
   margin-left: 10px;
 `;
 const GroupTextIcon = styled(Icon)`
   margin: 0;
+`;
+const HistoryTitle = styled.Text`
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 15px;
+`;
+const HistoryContent = styled.View`
+  width: 100%;
+`;
+const HistoryText = styled.Text`
+  font-size: 16px;
+  margin-bottom: 8px;
 `;
 
 export default Group;
