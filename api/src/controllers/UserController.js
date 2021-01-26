@@ -4,6 +4,7 @@ import jwt from "jwt-simple";
 class UserController {
   async register(req, res) {
     try {
+      req.body.token = "";
       const user = await User.create(req.body);
       return res
         .status(200)
@@ -31,11 +32,21 @@ class UserController {
       bcrypt.compare(
         req.body.password,
         user.password || "",
-        function (err, result) {
+        async function (err, result) {
           if (result) {
             const payload = { id: user._id };
             const token = jwt.encode(payload, process.env.SECRET_JWT || "");
-            return res.status(200).json({ token: token });
+            const tokenRegister = await User.update(
+              { email: user.email },
+              { $set: { token: token } }
+            );
+            if (tokenRegister) {
+              return res.status(200).json({ token: token });
+            } else {
+              return res
+                .status(401)
+                .json({ mensage: "Ocorreu um erro ao gravar o token" });
+            }
           } else if (err) {
             return res.status(401).json({ mensage: "Ocorreu um erro" });
           } else {
@@ -57,12 +68,10 @@ class UserController {
       const id = req.path.split("/").pop();
       const user = await User.deleteOne({ email: id });
       if (user.deletedCount >= 1) {
-        return res
-          .status(200)
-          .json({
-            message: "Usuário deletado com sucesso",
-            userDeleted: user.deletedCount,
-          });
+        return res.status(200).json({
+          message: "Usuário deletado com sucesso",
+          userDeleted: user.deletedCount,
+        });
       } else {
         return res.status(400).json({ message: "Usuário não encontrado" });
       }
