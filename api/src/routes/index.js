@@ -1,4 +1,5 @@
 import { Router } from "express";
+import AuthService from "../services/AuthService";
 
 // Controllers
 import UserController from "../controllers/UserController";
@@ -16,6 +17,6 @@ routes.post("/user/login", UserController.login);
 routes.delete("/user/delete/:id", UserController.delete);
 
 //Group
-routes.post("/group/register", GroupController.register);
+routes.post("/group/register", AuthService.tokenAuth, GroupController.register);
 
 export default routes;

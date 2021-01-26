@@ -10,12 +10,23 @@ class AuthService {
       if (token === undefined) {
         return res.status(401).json({ mensagem: "Token não encontrado" });
       } else {
-        await jwt.decode(token.toString(), process.env.SECRET_JWT || "");
         return next();
       }
     } catch (err) {
       return res.status(401).json({ mensagem: "Token invalido" });
     }
   }
+
+  async tokenDecode(token) {
+    try {
+      const jwtDecode = await jwt.decode(
+        token.toString(),
+        process.env.SECRET_JWT || ""
+      );
+      return jwtDecode;
+    } catch (err) {
+      return err;
+    }
+  }
 }
-export default AuthService;
+export default new AuthService();
