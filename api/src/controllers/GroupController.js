@@ -36,6 +36,19 @@ class UserController {
         .json({ message: "Ocorreu um erro ao abrir o grupo" });
     }
   }
+  async getAllUserId(req, res) {
+    try {
+      const tokenDecode = await AuthService.tokenDecode(
+        req.headers["x-access-token"]
+      );
+      const groups = await Group.find({ userId: tokenDecode.id });
+      return res.status(200).json({ data: groups });
+    } catch (err) {
+      return res
+        .status(400)
+        .json({ message: "Ocorreu um erro ao buscar os grupos" });
+    }
+  }
 }
 
 export default new UserController();

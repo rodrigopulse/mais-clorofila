@@ -19,5 +19,5 @@ routes.delete("/user/delete/:id", AuthService.tokenAuth, UserController.delete);
 //Group
 routes.post("/group/create", AuthService.tokenAuth, GroupController.create);
 routes.get("/group/get/:id", AuthService.tokenAuth, GroupController.getId);
-
+routes.get("/group/get", AuthService.tokenAuth, GroupController.getAllUserId);
 export default routes;
