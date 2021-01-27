@@ -13,6 +13,7 @@ const UserSchema = new Schema(
     name: { type: String },
     password: { type: String },
     token: { type: String },
+    role: { type: String },
   },
   { collection: "users", versionKey: false, timestamps: true }
 );

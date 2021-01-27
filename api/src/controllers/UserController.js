@@ -5,6 +5,7 @@ class UserController {
   async register(req, res) {
     try {
       req.body.token = "";
+      req.body.role = "user";
       const user = await User.create(req.body);
       return res
         .status(200)
