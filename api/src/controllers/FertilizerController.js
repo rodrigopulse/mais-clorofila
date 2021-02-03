@@ -18,14 +18,22 @@ class FertilizerController {
         date: fertilizer.date,
         group: group._id,
       });
-    } catch (err) {}
+    } catch (err) {
+      return res
+        .status(400)
+        .json({ message: "Ocorreu um erro e o grupo não foi criado" });
+    }
   }
   async getGroupId(req, res) {
     try {
       const groupId = req.path.split("/").pop();
       const fertilizer = await Fertilizer.find({ groupId: groupId });
       res.status(200).json({ data: fertilizer });
-    } catch (err) {}
+    } catch (err) {
+      return res
+        .status(400)
+        .json({ message: "Ocorreu um erro e o grupo não foi criado" });
+    }
   }
 }
 
