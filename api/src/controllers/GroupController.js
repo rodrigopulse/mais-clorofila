@@ -1,5 +1,6 @@
 import Group from "../schemas/GroupSchema";
 import AuthService from "../services/AuthService";
+import Fertilizer from "../services/AuthService";
 class UserController {
   async create(req, res) {
     try {

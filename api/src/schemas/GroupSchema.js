@@ -8,10 +8,9 @@ const GroupSchema = new Schema(
     userId: { type: Schema.Types.ObjectId, ref: User },
     description: { type: String },
     lastWatering: { type: Date },
-    lastfertilizing: { type: Date },
-    nextFertilizing: { type: Date },
-    watering: { type: Array },
-    fertilizing: { type: Array },
+    dateLastFertilization: { type: Date },
+    nameLastFertinization: { type: String },
+    dateNextFertilization: { type: Date },
   },
   {
     collection: "groups",
