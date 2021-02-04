@@ -14,7 +14,7 @@ const Group = () => {
     <ContainerScroll content>
       <Container align="center" marginBottom marginTop>
         <GroupImage
-          source={require(`../assets/images/group-icons/garden.png`)}
+          source={require(`../assets/images/group-icons/icon-1.png`)}
         />
       </Container>
       <Divisor />

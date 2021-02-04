@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+
+// Services
+import { getAllUserId } from '../services/GroupService';
 
 // Styles
 import { ContainerScroll, Container } from '../assets/styles/Grid';
@@ -10,23 +13,32 @@ const Home = ({ navigation }) => {
   const pressCard = () => {
     navigation.navigate('Group');
   };
+  const [groups, setGroups] = useState([]);
+  useEffect(() => {
+    getAllUserId()
+      .then((res) => {
+        setGroups(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <ContainerScroll content>
       <Container marginTop marginBottom>
         <Title>Meus Grupos</Title>
       </Container>
-      <CardList
-        onPress={pressCard}
-        title="Hortaliças"
-        text={[
-          {
-            text: 'Última adubação: 01/10/2020',
-          },
-          {
-            text: 'Última rega: 02 -10-2020',
-          },
-        ]}
-      />
+      {groups &&
+        groups.map((res, index) => (
+          <CardList
+            key={index}
+            onPress={pressCard}
+            title={res.name}
+            lastFertilization={res.dateLastFertilization}
+            dateLastWatering={res.dateLastWatering}
+            icon={res.icon}
+          />
+        ))}
     </ContainerScroll>
   );
 };

@@ -7,7 +7,7 @@ const GroupSchema = new Schema(
     icon: { type: String },
     userId: { type: Schema.Types.ObjectId, ref: User },
     description: { type: String },
-    lastWatering: { type: Date },
+    dateLastWatering: { type: Date },
     dateLastFertilization: { type: Date },
     nameLastFertinization: { type: String },
     dateNextFertilization: { type: Date },

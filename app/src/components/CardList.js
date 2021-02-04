@@ -1,19 +1,29 @@
 import React from 'react';
+import { Icons } from './Icons';
+
+// Services
+import { dateBrasil } from '../services/DateService';
 // Styles
 import styled from 'styled-components/native';
 
 const CardList = (props) => {
+  console.log(typeof icon);
   return (
     <CardListPress onPress={props.onPress}>
       <CardListContainer>
-        <CardListIcon
-          source={require(`../assets/images/group-icons/garden.png`)}
-        />
+        <CardListIcon source={Icons[props.icon]} />
         <CardListContent>
           <CardListTitle>{props.title}</CardListTitle>
-          {props.text.map((item, index) => (
-            <CardListText key={index}>{item.text}</CardListText>
-          ))}
+          {props.lastFertilization && (
+            <CardListText>
+              Última adubação: {dateBrasil(props.lastFertilization)}
+            </CardListText>
+          )}
+          {props.dateLastWatering && (
+            <CardListText>
+              Última adubação: {dateBrasil(props.dateLastWatering)}
+            </CardListText>
+          )}
         </CardListContent>
       </CardListContainer>
     </CardListPress>
@@ -23,6 +33,7 @@ const CardList = (props) => {
 const CardListPress = styled.TouchableHighlight`
   width: 100%;
   height: 80px;
+  margin-bottom: 15px;
 `;
 const CardListContainer = styled.View`
   width: 100%;
